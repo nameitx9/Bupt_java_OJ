@@ -1,8 +1,5 @@
-import java.io.*;//æ ‡å‡†è¾“å…¥è¾“å‡º
+package main;
 import java.util.Scanner;
-
-import javax.swing.plaf.basic.BasicListUI.FocusHandler;
-import javax.swing.text.AsyncBoxView;
 class Student{
     private String studentName;
     private String studentNumber;
@@ -25,7 +22,7 @@ class Student{
     {
         this.studentName = name;
         this.studentNumber = number;
-    }//æ„é€ æ–¹æ³•
+    }//¹¹Ôì·½·¨
     int getMathsMark(){
         return markForMaths;
     }
@@ -51,7 +48,7 @@ class Student{
                 + 
                 "Science:" + getScienceMark() 
                 + 
-        "Average Score:"+Math.round(calculateAverage()*10)/10.0;//ä¿ç•™ä¸€ä½å°æ•°
+        "Average Score:"+Math.round(calculateAverage()*10)/10.0;//±£ÁôÒ»Î»Ğ¡Êı
         return astring;
     }
 }
@@ -62,13 +59,13 @@ class StudentList {
 
     public StudentList(int length) {
         list = new Student[length];
-    }//æ„é€ æ–¹æ³•
+    }//¹¹Ôì·½·¨
 
     boolean add(Student stu) {
-        //æ·»åŠ å­¦ç”Ÿï¼ŒæˆåŠŸè¿”trueï¼Œå¦åˆ™ï¼Œfalse
+        //Ìí¼ÓÑ§Éú£¬³É¹¦·µtrue£¬·ñÔò£¬false
         if (total < list.length) {
             list[total] = stu;
-            total++;//totalå§‹ç»ˆè¡¨ç¤ºå½“å‰åˆ—è¡¨ä¸­å…±æœ‰çš„å­¦ç”Ÿæ•°
+            total++;//totalÊ¼ÖÕ±íÊ¾µ±Ç°ÁĞ±íÖĞ¹²ÓĞµÄÑ§ÉúÊı
             return true;
         } else {
             return false;
@@ -77,44 +74,44 @@ class StudentList {
 
     boolean remove(String number)
     {
-        int no = -1;//è¦åˆ é™¤çš„å­¦ç”Ÿçš„åºå·
-        for (int i = 0; i < total; i++)//list[total-1]æ˜¯åˆ—è¡¨ä¸­çš„æœ€åä¸€ä¸ªå­¦ç”Ÿ
+        int no = -1;//ÒªÉ¾³ıµÄÑ§ÉúµÄĞòºÅ
+        for (int i = 0; i < total; i++)//list[total-1]ÊÇÁĞ±íÖĞµÄ×îºóÒ»¸öÑ§Éú
         {
             if (list[i].getNumber().equals(number)) {
                 no = i;
-                break;//æ‰¾åˆ°å°±åœä¸‹
-            } //é€šè¿‡ä¸€ä¸ªå¾ªç¯æ‰¾åˆ°è¦åˆ é™¤çš„å­¦ç”Ÿæ‰€åœ¨çš„ä½ç½®
+                break;//ÕÒµ½¾ÍÍ£ÏÂ
+            } //Í¨¹ıÒ»¸öÑ­»·ÕÒµ½ÒªÉ¾³ıµÄÑ§ÉúËùÔÚµÄÎ»ÖÃ
 
         }
         if (no == -1) {
             return false;
-        } //æ²¡æ‰¾åˆ°
+        } //Ã»ÕÒµ½
         else {
             for (int j = no; j < total - 1; j++) {
                 list[j] = list[j + 1];
             }
             total = total - 1;
             return true;
-        } //æ‰¾åˆ°äº†
+        } //ÕÒµ½ÁË
     }
 
     boolean updateItem(String number, int math, int english, int science) {
-        int no = -1;//è¦æ›´æ–°çš„å­¦ç”Ÿçš„åºå·
-        for (int i = 0; i < total; i++)//list[total-1]æ˜¯åˆ—è¡¨ä¸­çš„æœ€åä¸€ä¸ªå­¦ç”Ÿ
+        int no = -1;//Òª¸üĞÂµÄÑ§ÉúµÄĞòºÅ
+        for (int i = 0; i < total; i++)//list[total-1]ÊÇÁĞ±íÖĞµÄ×îºóÒ»¸öÑ§Éú
         {
             if (list[i].getNumber().equals(number)) {
                 no = i;
-                break;//æ‰¾åˆ°å°±åœä¸‹
-            } //é€šè¿‡ä¸€ä¸ªå¾ªç¯æ‰¾åˆ°è¦æ›´æ–°ä¿¡æ¯çš„å­¦ç”Ÿæ‰€åœ¨çš„ä½ç½®
+                break;//ÕÒµ½¾ÍÍ£ÏÂ
+            } //Í¨¹ıÒ»¸öÑ­»·ÕÒµ½Òª¸üĞÂĞÅÏ¢µÄÑ§ÉúËùÔÚµÄÎ»ÖÃ
 
         }
         if (no == -1) {
             return false;
-        } //æ²¡æ‰¾åˆ°
+        } //Ã»ÕÒµ½
         else {
             list[no].enterMarks(math, english, science);
             return true;
-        } //æ‰¾åˆ°äº†
+        } //ÕÒµ½ÁË
     }
 
     boolean isEmpty()
@@ -133,19 +130,19 @@ class StudentList {
 
     Student getItem(String number)
     {
-        for (int i = 0; i < total || i==0; i++)//list[total-1]æ˜¯åˆ—è¡¨ä¸­çš„æœ€åä¸€ä¸ªå­¦ç”Ÿ,è¿˜è¦æ³¨æ„iä»0å¼€å§‹æ£€æŸ¥
+        for (int i = 0; i < total || i==0; i++)//list[total-1]ÊÇÁĞ±íÖĞµÄ×îºóÒ»¸öÑ§Éú,»¹Òª×¢Òâi´Ó0¿ªÊ¼¼ì²é
         {
             if (total==0)
             {
-                break;//å½“ä¸€å¼€å§‹ï¼Œi=0ï¼Œå³listä¸ºç©ºçš„æ—¶å€™ä¹Ÿèƒ½è¿›è¡Œæœç´¢ã€‚
+                break;//µ±Ò»¿ªÊ¼£¬i=0£¬¼´listÎª¿ÕµÄÊ±ºòÒ²ÄÜ½øĞĞËÑË÷¡£
             }
             if(list[i].getNumber().equals(number))
             {
-                return list[i];//æ‰¾åˆ°äº†ç›´æ¥è¾“å‡º
+                return list[i];//ÕÒµ½ÁËÖ±½ÓÊä³ö
             }
 
         }
-        return null;//æ²¡æ‰¾åˆ°
+        return null;//Ã»ÕÒµ½
     }
 }
 public class Main
@@ -153,49 +150,56 @@ public class Main
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
-        int n  = sc.nextInt();//å‘½ä»¤æ•°
-        StudentList studentlist = new StudentList(100);//åˆ›å»ºå­¦ç”Ÿåˆ—è¡¨
+        int length = sc.nextInt();
+        StudentList studentlist = new StudentList(length);//´´½¨Ñ§ÉúÁĞ±í
+        System.out.println("ÁĞ±í½¨Á¢³É¹¦");
 
         Student stu;
         String number;
         String name;
         int math;
         int english;
-        int science;//ä¸´æ—¶ä½¿ç”¨çš„è¾…åŠ©å˜é‡
+        int science;//ÁÙÊ±Ê¹ÓÃµÄ¸¨Öú±äÁ¿
 
-        for (int j = 0; j < n;j++)//åœ¨æ‰§è¡Œæ‰€æœ‰å‘½ä»¤åç»“æŸ
+        while(sc.hasNextLine())
         {
 
             int i = sc.nextInt();
-            switch (i) {
+            switch(i)
+            {
             case 1://ADD STUDENT
-                   //add student
+                //add student
                 number = sc.next();
                 name = sc.next();
                 math = sc.nextInt();
                 english = sc.nextInt();
                 science = sc.nextInt();
                 stu = new Student(name, number);
-                stu.enterMarks(math, english, science);//å»ºç«‹ä¸€ä¸ªå­¦ç”Ÿå¯¹è±¡
-                if (studentlist.getItem(number) == null)//å­¦ç”Ÿä¸å­˜åœ¨å°±åŠ å…¥
+                stu.enterMarks(math, english, science);//½¨Á¢Ò»¸öÑ§Éú¶ÔÏó
+                if(studentlist.getItem(number)==null)//Ñ§Éú²»´æÔÚ¾Í¼ÓÈë
                 {
-                    boolean flag = studentlist.add(stu);//å°è¯•åŠ å…¥
+                    boolean flag = studentlist.add(stu);//³¢ÊÔ¼ÓÈë
                     if (flag == true) {
                         System.out.println("Add success");
-                    } 
-                } else {
-                    System.out.println("Students already exist");//å­¦ç”Ÿå·²å­˜åœ¨
+                    } else {
+                        System.out.println("Êı×éÒç³ö");
+                    }
+
+                }
+                else {
+                    System.out.println("Students already exist");//Ñ§ÉúÒÑ´æÔÚ
                 }
                 break;
             case 2://delete student
                 number = sc.next();
-                stu = studentlist.getItem(number);
-                if (stu == null)//è¦æ‰¾çš„å­¦ç”Ÿä¸å­˜åœ¨
+                stu=studentlist.getItem(number);
+                if( stu == null)//ÒªÕÒµÄÑ§Éú²»´æÔÚ
                 {
 
                     System.out.println("Students do not exist");
-                } else {
-                    //è¦æ‰¾åˆ°å­¦ç”Ÿå­˜åœ¨
+                }
+                else {
+                    //ÒªÕÒµ½Ñ§Éú´æÔÚ
                     studentlist.remove(number);
                     System.out.println("Delete success");
                 }
@@ -205,44 +209,50 @@ public class Main
                 math = sc.nextInt();
                 english = sc.nextInt();
                 science = sc.nextInt();
-                stu = studentlist.getItem(number);
-                if (stu == null)//è¦æ‰¾çš„å­¦ç”Ÿä¸å­˜åœ¨
-                {
+            stu=studentlist.getItem(number);
+            if( stu == null)//ÒªÕÒµÄÑ§Éú²»´æÔÚ
+            {
 
-                    System.out.println("Students do not exist");
-                } else {
-                    //è¦æ‰¾åˆ°å­¦ç”Ÿå­˜åœ¨
-                    studentlist.updateItem(number, math, english, science);
-                    System.out.println("Update success");
-                }
-                break;
-            case 4://æ˜¾ç¤ºå¹³å‡æˆç»©
-                number = sc.next();
-                //System.out.println(number);
-                stu = studentlist.getItem(number);
-                if (stu == null)//è¦æ‰¾çš„å­¦ç”Ÿä¸å­˜åœ¨
-                {
+                System.out.println("Students do not exist");
+            }
+            else {
+                //ÒªÕÒµ½Ñ§Éú´æÔÚ
+                studentlist.updateItem(number, math, english, science);
+                System.out.println("Update success");
+            }
+            break;
+        case 4://ÏÔÊ¾Æ½¾ù³É¼¨
+            number = sc.next();
+            System.out.println(number);
+            stu = studentlist.getItem(number);
+            if( stu == null)//ÒªÕÒµÄÑ§Éú²»´æÔÚ
+            {
 
-                    System.out.println("Students do not exist");
-                } else {
-                    //è¦æ‰¾åˆ°å­¦ç”Ÿå­˜åœ¨
-                    System.out.println("Student ID:" + stu.getNumber() + "\nName:" + stu.getName() + "\nAverage Score:"
-                            + Math.round(stu.calculateAverage() * 10) / 10.0);
-                }
-                break;
-            case 5:
-                if (studentlist.isEmpty() == true) {
-                    //list is empty
-                    System.out.println("List is empty");
-                } else {
-                    System.out.println("List is not empty");
-                }
-                break;
-            case 6:
-                System.out.println(studentlist.getTotal());
-                break;
+                System.out.println("Students do not exist");
+            }
+            else {
+                //ÒªÕÒµ½Ñ§Éú´æÔÚ
+                System.out.println("Student ID:"+stu.getNumber()
+                +
+                "Name:"+stu.getName()
+                +
+                "\nAverage Score:"+stu.calculateAverage());
+            }
+            break;
+        case 5:
+            if(studentlist.isEmpty()==true)
+            {
+                //list is empty
+                System.out.println("List is empty");
+            }
+            else {
+                System.out.println("List is not empty");
+            }
+            break;
+        case 6:
+            System.out.println(studentlist.getTotal());
+            break;
             }
         }
-        sc.close();
     }
 }
