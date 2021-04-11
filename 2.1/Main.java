@@ -2,6 +2,8 @@ import java.io.*;//标准输入输出
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+
+
 class StudentNumberException extends Exception {//自定义异常类，继承于exception
     public StudentNumberException()//构造方法接受异常信息
     {
@@ -10,18 +12,18 @@ class StudentNumberException extends Exception {//自定义异常类，继承于
 }
 
 class ScoreException extends Exception {
-    public ScoreException()
-    {
+    public ScoreException() {
         super("Illegal score format");
     }
 }
+
 class Student {
     private String studentName;
     private String studentNumber;
     private int markForMaths = -1;
     private int markForEnglish = -1;
     private int markForScience = -1;
-    private String legal_studentnumber = "^[2][0][0-9]{8}$";//用正则式来表示合法的学号
+    private String legal_studentnumber = "^[2][0][0-9]{8}";//用正则式来表示合法的学号
 
     private boolean judgeLegalScore(int score)
     {
@@ -36,17 +38,25 @@ class Student {
         return studentName;
     }
 
-    void enterMarks(int Maths, int English, int Science) throws ScoreException {
-        if ((!judgeLegalScore(Maths))|| (!judgeLegalScore(English))||(!judgeLegalScore(Science)))
+    void enterMarks(int Maths, int English, int Science)  throws ScoreException {
+        if (!judgeLegalScore(Maths))
         {
             throw new ScoreException();
-        }//三种成绩中，只要有一种不合法，就抛出异常
-        markForMaths = Maths;
-        markForEnglish = English;
-        markForScience = Science;
+        }
+        this.markForMaths = Maths;
+        if (!judgeLegalScore(English))
+        {
+            throw new ScoreException();
+        }
+        this.markForEnglish = English;
+        if (!judgeLegalScore(Science))
+        {
+            throw new ScoreException();
+        }
+        this.markForScience = Science;
     }
 
-    public Student(String name, String number) throws StudentNumberException {
+    public  Student(String name, String number)  throws StudentNumberException {
         if (!Pattern.matches(legal_studentnumber, number))
         {
             throw new StudentNumberException();
@@ -81,6 +91,8 @@ class Student {
 
 public class Main
 {
+
+  
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
@@ -89,9 +101,21 @@ public class Main
         int math = sc.nextInt();
         int english = sc.nextInt();
         int science = sc.nextInt();
-        Student astudent = new Student(name, number);
-        astudent.enterMarks(math, english, science);//读入成绩
-        System.out.println(astudent.tostring());
+        try{
+            Student astudent=new Student(name,number);
+            astudent.enterMarks(math, english ,science);
+            System.out.println(astudent.tostring());
+        }
+        catch(StudentNumberException e)
+        {
+            //学号错误
+            System.out.println("Illegal number format");
+        }
+        catch(ScoreException e)
+        {
+            //成绩错误
+            System.out.println("Illegal score format ");
+        }
         sc.close();
     }
 }
